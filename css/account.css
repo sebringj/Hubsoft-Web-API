@@ -1,0 +1,91 @@
+﻿h1 
+{
+    margin-bottom:10px;
+}
+.help-inline
+{
+    color:#f00;
+}
+.tab-pane
+{
+    padding:0 20px;
+}
+.detail { display:none; }
+.order-history
+{
+    width:100%;
+}
+.order-history tr > th,
+.order-history:hover tr > td
+{
+    cursor:pointer;
+}
+.order-history tr td .img
+{
+    width:50px;
+    height:50px;
+    overflow:hidden;
+}
+.account .order-history tr td .img img
+{
+    width:50px;
+    height:auto;
+}
+.account .order-history tr.detail,
+.account .order-history tr.detail .slide
+{
+    display:none;
+}
+.order-history tr.detail > td
+{
+    
+}
+.order-history tr.detail .slide
+{
+    border:10px solid #ccc;
+    padding:10px;
+}
+.order-history .order-table
+{
+    width:100%;       
+}
+.order-history caption
+{
+    font-size:20px;
+    text-align:center;
+    text-align:left;
+}
+.order-history > caption
+{
+    font-size:30px;
+}
+.order-history .hover
+{
+    cursor:pointer;
+}
+.order-history .order-detail
+{
+
+}
+.order-history .order-table .total
+{
+    display:inline-block;
+    padding:5px 10px 5px 10px;
+}
+.order-history .quick-info > td
+{
+    
+}
+#changePasswordForm .alert
+{
+
+}
+.inline
+{
+    display:inline-block;
+    margin-left:10px;
+}
+.modal-body .alert
+{
+    margin-top:5px;
+}

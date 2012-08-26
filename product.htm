@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Product</title>
+        <link rel="shortcut icon" href="//s3.amazonaws.com/emeraldcode.com/img/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//s3.amazonaws.com/emeraldcode.com/img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-theme.css">
+        <link rel="stylesheet" href="./css/product.css">
+        <link rel="stylesheet" href="./css/main.css" />
+    </head>
+    <body class="detail">
+
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li><a class="brand" href="./products.htm">Hubsoft Store</a></li>
+                        <li class="active"><a href="./products.htm">Shop</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <ul class="nav pullright right-nav">
+                        <li class="loggedin"><a>Welcome, <span class="username"></span></a></li>
+                        <li class="loggedin"><a href="./account.htm">My Account</a></li>
+                        <li class="loggedin signoutlink"><a href="#">Sign Out</a></li>
+                        <li class="loggedout"><a href="./account.htm">Sign In</a></li>
+                        <li id="cartStatusLi"><a id="cartStatus" href="./cart.htm"><i class="icon-shopping-cart icon-white"></i> Cart <span class="count badge badge-inverse">0</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">   
+            <ul class="breadcrumb">
+                <li><a href="./products.htm" id="products-breadcrumb">Products</a> <span class="divider">/</span></li>
+                <li class="active" id="product-breadcrumb">Product</li>
+            </ul>  
+            <div id="product"></div>
+        </div>
+        
+        <script id="productTemplate" type="template">
+            <div style="clear:both"></div>
+            <div class="left">
+                <div class="inner">
+                    [%
+                        var inStockClass = (product.inStock) ? '' : ' out-of-stock';
+                    %]
+                    <div class="product-image[%=inStockClass%]">
+                        <div class="out-of-stock"></div>
+                        <img class="main-img" src="[%=product.images[0]%]" alt="[%=product.productName%]" data-big="[%=product.images[0]%]" />
+                    </div>
+                </div>
+            </div>
+            <div class="center">
+                <div class="inner">
+                    <h1 class="product-name">[%=product.productName%]</h1>
+                        
+                    <div class="product-price">
+                        [% if (product.sizes[0].msrp > product.sizes[0].unitPrice) { %]
+                            <span class="value discount">$[%=product.sizes[0].msrp%]</span>
+                            <span class="value">$[%=product.sizes[0].unitPrice%]</span>
+                        [% } else {%]
+                            <span class="value">$[%=product.sizes[0].msrp%]</span>
+                        [% } %]
+                    </div>
+            
+                    <div class="rating-like">
+                    </div>
+            
+                    <label class="product-size" style="">
+                        <label>Size:</label>
+                        <select class="input-small">
+                            <option>select size</option>
+                            [% for(var i = 0; i < product.sizes.length; i++) { %]
+                                [%  
+                                    var disabled = (product.sizes[i].outOfStock) ? 'disabled="disabled"' : '';
+                                    var outOfStockText = (product.sizes[i].outOfStock) ? ' (out of stock)' : '';
+                                %]
+                                <option [%=disabled%] value="[%=product.sizes[i].sku%]">[%=product.sizes[i].sizeName%][%=outOfStockText%]</option>
+                            [% } %]
+                        </select>
+                    </label>
+                    [% var colorCSS = (product.colors.length < 2) ? '' : ''; %]
+                    <div class="colors" style="[%=colorCSS%]">
+                        <label>Colors:</label>
+                        <div class="color-group">
+                            [% for(var i = 0; i < product.colors.length; i++) { %]
+                                <div class="color" 
+                                    data-instock="[%=product.colors[i].inStock%]"
+                                    data-producturl="[%=product.colors[i].productURL%]" 
+                                    data-productnumber="[%=product.colors[i].productNumber%]">
+                                    [% 
+                                        var selectedClass = (product.productNumber == product.colors[i].productNumber) ? 'selected' : '';
+                                    %]
+                                    <span class="value [%=selectedClass%]"><span style="background-color:[%=product.colors[i].colorValue%]"></span></span>
+                                    <span>[%=product.colors[i].colorName%]</span>
+                                </div>
+                            [% } %]
+                        </div>  
+                    </div>
+                </div> 
+            </div>
+            <div class="right">
+                <div class="inner">
+                    <div class="well cart-buttons">
+                        <div class="quantity-box">
+                            <label>
+                                <span>quantity:</span>
+                                <select class="span1">
+                                    <option selected>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </label>
+                        </div>
+                        <button class="add-to-cart btn btn-success"><i class="icon-plus icon-white"></i> Add to Cart</button>
+                        <button class="checkout btn btn-success" style="display:none"><i class="icon-shopping-cart icon-white"></i> checkout</button>
+                    </div> 
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="bottom">
+              <div class="product-description">[%=product.descriptions[0]%]</div>
+            </div>
+        </script>
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="//api.emeraldcode.com/js/json2.js"></script>
+        <script src="//api.emeraldcode.com/js/cartgui.js"></script>
+        <script src="//api.emeraldcode.com/js/api.js?v1.1"></script>
+        <script src="//api.emeraldcode.com/js/plugins/ejs.js"></script>
+        <script src="//api.emeraldcode.com/js/plugins/jquery.zoom.min.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/product.js"></script>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Your Cart</title>
+        <link rel="shortcut icon" href="//s3.amazonaws.com/emeraldcode.com/img/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//s3.amazonaws.com/emeraldcode.com/img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-theme.css">
+        <link rel="stylesheet" href="./css/product.css">
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/cart.css">
+    </head>
+    <body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li><a class="brand" href="./products.htm">Hubsoft Store</a></li>
+                    <li class="active"><a href="./products.htm">Shop</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <ul class="nav pullright right-nav">
+                    <li class="loggedin"><a>Welcome, <span class="username"></span></a></li>
+                    <li class="loggedin"><a href="./account.htm">My Account</a></li>
+                    <li class="loggedin signoutlink"><a href="#">Sign Out</a></li>
+                    <li class="loggedout"><a href="./account.htm">Sign In</a></li>
+                    <li id="cartStatusLi"><a id="cartStatus" href="./cart.htm"><i class="icon-shopping-cart icon-white"></i> Cart <span class="count badge badge-inverse">0</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <div class="container">
+            <div class="container">   
+                <ul class="breadcrumb">
+                    <li><a href="./products.htm" id="products-breadcrumb">Products</a> <span class="divider">/</span></li>
+                    <li class="active">Cart</li>
+                </ul>  
+                <div id="product"></div>
+            </div>
+            <div id="cartList"></div>
+        </div>
+
+        <script id="cartTemplate" type="template">
+            <table id="cart">
+                <thead>
+                <tr>
+                    <th colspan="2" class="product-detail">&nbsp;</th>
+                    <th class="qty">qty</th>
+                    <th class="price">price</th>
+                    <th colspan="2" class="subtotal">sub total</th>
+                </tr>
+                </thead>
+                <tbody>
+                [% for(var i = 0; i < items.length; i++) { %]
+                    <tr data-sku="[%=items[i].sku%]">
+                        <td><a href="./product.htm#[%=items[i].url%]"><img class="cart-image" src="[%=items[i].images[6]%]"></a></td>
+                        <td>[%=items[i].productName%] - [%=items[i].colorName%] - [%=items[i].sizeName%]</td>
+                        <td><input class="qty input-min" type="text" value="[%=items[i].quantity%]" maxlength="2"></td>
+                        <td>$[%=items[i].unitPrice.toFixed(2)%]</td>
+                        <td>$[%=(items[i].unitPrice * items[i].quantity).toFixed(2)%]</td>
+                        <td><button class="btn btn-danger btn-mini btn-close"><i class="icon-remove icon-white"></i></button></td>
+                    </tr>
+                [% } %]
+                <tr>
+                    <td colspan="6" class="subtotal"><strong>subtotal:</strong> $[%=subtotal.toFixed(2)%]</td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="checkout"><a href="./checkout.htm"><button class="checkout btn btn-success"><i class="icon-shopping-cart icon-white"></i> Checkout</button></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="no-items" style="display:none;">No Items in Cart</div>
+        </script>
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="//api.emeraldcode.com/js/json2.js"></script>
+        <script src="//api.emeraldcode.com/js/cartgui.js"></script>
+        <script src="//api.emeraldcode.com/js/api.js?v1.1"></script>
+        <script src="//api.emeraldcode.com/js/plugins/ejs.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/cart.js"></script>
+    </body>
+</html>

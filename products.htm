@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Products</title>
+        <link rel="shortcut icon" href="//s3.amazonaws.com/emeraldcode.com/img/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//s3.amazonaws.com/emeraldcode.com/img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-theme.css">
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/products.css">
+    </head>
+    <body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li><a class="brand" href="./products.htm">Hubsoft Store</a></li>
+                    <li class="active"><a href="./products.htm">Shop</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <ul class="nav pullright right-nav">
+                    <li class="loggedin"><a>Welcome, <span class="username"></span></a></li>
+                    <li class="loggedin"><a href="./account.htm">My Account</a></li>
+                    <li class="loggedin signoutlink"><a href="#">Sign Out</a></li>
+                    <li class="loggedout"><a href="./account.htm">Sign In</a></li>
+                    <li id="cartStatusLi"><a id="cartStatus" href="./cart.htm"><i class="icon-shopping-cart icon-white"></i> Cart <span class="count badge badge-inverse">0</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-pills" id="productMenu">
+            <li><a href="#">All</a></li>
+            <li><a href="#helmet">Helmets</a></li>
+            <li><a href="#jackets">Jackets</a></li>
+            <li><a href="#pants">Pants</a></li>
+        </ul>
+        
+        <div id="products">
+            <!-- use server-side output here for SEO -->
+            <!-- see http://api.emeraldcode.com/v1/docs -->
+        </div>
+    </div>
+        
+        <script id="productsTemplate" type="template">
+            [% for(var i = 0; i < colors.length; i++) { %]
+                <div class="color-group">
+                    [%
+                        var mainInStockClass = (colors[i][0].inStock) ? '' : 'out-of-stock';
+                    %]
+                    <a href="[%=colors[i][0].productURL%]" class="product-image [%=mainInStockClass%]"><span class="out-of-stock"></span><img 
+                        src="[%=colors[i][0].images[6]%]" alt="[%=colors[i][0].productName%]" /></a>
+                    <div class="colors">
+                        <div class="scroller">
+                        [% if (colors[i].length > 1) { %]
+                            [% for(var j = 0; j < colors[i].length; j++) { %]
+                                [% 
+                                    var cssClass = (j === 0) ? 'selected' : ''; 
+                                %]
+                                <div class="color [%=cssClass%]" 
+                                    data-size-msrp="[%=colors[i][j].sizes[0].msrp%]"
+                                    data-size-unitprice="[%=colors[i][j].sizes[0].unitPrice%]"
+                                    data-msrp="[%=colors[i][j].msrp%]" 
+                                    data-instock="[%=colors[i][j].inStock%]"
+                                    data-url="[%=colors[i][j].productURL%]"
+                                    data-thumb="[%=colors[i][j].images[6]%]">
+                                    <div style="background-color:[%=colors[i][j].colorValue%]"></div>
+                                </div>
+                            [% } %]
+                        [% } %]
+                        </div>
+                    </div>
+                    <a href="[%=colors[i][0].productURL%]" class="product-name">[%=colors[i][0].productName%]</a>
+                    <div class="price">
+                    [% if (colors[i][0].sizes[0].msrp > colors[i][0].sizes[0].unitPrice) { %]
+                        <span class="msrp discount">$[%=colors[i][0].sizes[0].msrp.toFixed(2)%]</span>
+                        <span class="unit-price">$[%=colors[i][0].sizes[0].unitPrice.toFixed(2)%]</span>
+                    [% } else { %]
+                        <span class="msrp">$[%=colors[i][0].sizes[0].msrp.toFixed(2)%]</span>
+                    [% } %]
+                    </div>
+                </div>
+            [% } %]
+        </script>
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="//api.emeraldcode.com/js/json2.js"></script>
+        <script src="//api.emeraldcode.com/js/cartgui.js"></script>
+        <script src="//api.emeraldcode.com/js/api.js"></script>
+        <script src="//api.emeraldcode.com/js/plugins/ejs.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/products.js"></script>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+﻿(function (ec) { // "ec" shortcut for "emeraldcode"
+
+    function drawProduct() {
+        var hash = window.location.hash.substr(1);
+        ec.getProduct({
+            productURL: hash
+        }, function (data) {
+            document.title = data.product.productName;
+            $('#product-breadcrumb').text(data.product.productName);
+            $('h1').text(data.product.productName);
+            var html = new EJS({ element: 'productTemplate' }).render(data);
+            $('#product').html(html);
+            $('.product-image').zoom({ icon: true, url: $('.product-image img').data('big') });
+        });
+    }
+
+    if (sessionStorage['products-breadcrumb']) {
+        if (sessionStorage['products-breadcrumb'].indexOf(',') === -1) {
+            $('#products-breadcrumb').attr('href', './products.htm#' + sessionStorage['products-breadcrumb'])
+                .text(sessionStorage['products-breadcrumb']);
+        }
+    }
+
+    ec.cart.triggerUpdateUI();
+    ec.client = 'klim';
+    ec.ready(function () {
+        drawProduct();
+    });
+
+    // events
+    $('body').on('click', '.color', function (ev) {
+        ev.preventDefault();
+        window.location = '#' + $(this).data('producturl');
+        setTimeout(function () {
+            drawProduct();
+        }, 0);
+    });
+    $('body').on('click', '.add-to-cart', function () {
+
+        var sku = $('.product-size select').val();
+        var qty = $('.quantity-box select').val();
+
+        if (sku == "select size") {
+            alert('select a size');
+            return;
+        }
+        ec.cart.snapshot();
+        ec.cart.addQuantity(sku, parseInt(qty));
+
+        ec.validateCart(function (data) {
+            if (!data.success) {
+                ec.cart.undo();
+                drawProduct();
+                if (data.errors && data.errors.length) {
+                    alert(data.errors[0].message);
+                }
+                return;
+            }
+            window.location = './cart.htm';
+        });
+    });
+})(emeraldcode);

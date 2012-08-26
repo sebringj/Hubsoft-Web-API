@@ -1,0 +1,120 @@
+.color-group
+{
+    position:relative;
+    display:block;
+    float:left;
+    width:204px;
+    height:270px;
+    margin:20px 0 0 20px;
+    overflow:hidden;
+    cursor:pointer;
+}
+.color-group .price
+{
+    color:#777;
+    text-align:center;
+    padding:2px;
+    font-size:0.9em;
+}
+.color-group .msrp,
+.color-group .unit-price
+{
+    display:inline-block;
+}
+.color-group .msrp.discount
+{
+    text-decoration:line-through;
+}
+.color-group .unit-price
+{
+    margin-left:5px;
+}
+.color-group .product-name
+{
+    text-align:center;
+    color:#000;
+    text-decoration:none;
+    font-size:0.9em;
+    display:block;
+    max-width:200px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-weight:bold;
+}
+.color-group:hover .product-name
+{
+    color:#555;
+}
+.color-group .product-image
+{
+    width:200px;
+    height:200px;
+    overflow:hidden;
+    display:block;
+    border:none;
+    font-size:0.0em;
+    text-align:center;
+    border:1px solid #000;
+    border-color:#555;
+    background-color:#0C0E0D;
+}
+.color-group .product-image .out-of-stock
+{
+    display:none;
+}
+.color-group .product-image.out-of-stock .out-of-stock
+{
+    display:block;
+    position:absolute;
+    width:200px;
+    height:200px;
+    right:2px;
+    top:2px;
+    background-image:url(//s3.amazonaws.com/www.emeraldcode.com/img/out-of-stock.png);
+    background-repeat:no-repeat;
+    background-position:right bottom;
+    z-index:5;
+}
+.color-group:hover .product-image
+{
+    
+}
+.color-group .product-image img
+{
+    max-width:200px;
+    height:auto;
+    border:none;
+}
+.color-group .colors
+{
+    display:block;
+    width:190px;
+    white-space:nowrap;
+    overflow:hidden;
+    margin:0 auto;
+    margin-top:5px;
+    text-align:center;
+    position:relative;
+}
+.color-group .colors .scroller
+{
+    text-align:center;
+}
+.color-group .colors .color
+{
+    border:1px solid #fff;
+    margin-right:1px;
+    display:inline-block;
+    cursor:pointer;
+}
+.color-group .colors .color.selected
+{
+    border-color:#000;
+}
+.color-group .colors .color div
+{
+    border:1px solid #ccc;
+    width:18px;
+    height:18px;
+}
