@@ -23,6 +23,6 @@ See [Pricing Details](http://www.emeraldcode.com/hubsoft-web-api)
 ## Thanks to…
 
 * [Lee Decker of Hubsoft](http://www.hubsoft.com.com/)
-* [Neal McKinney](mailto:neal_mckinney@yahoo.com) for Beta testing and the first web developer to use it
+* [Neal McKinney](mailto:neal_mckinney@yahoo.com) for Beta testing and being the first web developer to use it
 
 _– [Emerald Code](http://www.emeraldcode.com/)_
