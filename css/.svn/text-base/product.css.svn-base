@@ -1,0 +1,188 @@
+.zoomIcon { 
+    width:33px; 
+    height:33px; 
+    position:absolute; 
+    top:0;
+    right:0;
+    background:url(//s3.amazonaws.com/www.emeraldcode.com/img/zoom-icon.png);
+}
+.container .breadcrumb a#products-breadcrumb 
+{
+    text-transform:capitalize;    
+}
+.detail .left,
+.detail .center,
+.detail .right
+{
+    float:left;
+    font-size:0.9em;
+}
+.detail .left
+{
+    min-width:60%;
+    max-width:60%;
+}
+.detail .left .inner,
+.detail .center .inner,
+.detail .right .inner
+{
+    padding:10px 0 10px 20px;
+}
+.detail .left .product-image
+{
+    width:542px;
+    height:615px;
+    border:1px solid #e8e8e8;
+    padding:0;margin:0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    position:relative;
+    display:inline-block;
+    overflow:hidden;
+}
+.detail .left .product-image .out-of-stock
+{
+    display:none;
+}
+.detail .left .product-image.out-of-stock .out-of-stock
+{
+    display:block;
+    position:absolute;
+    width:250px;
+    height:100px;
+    left:140px;
+    top:200px;
+    background-image:url(//s3.amazonaws.com/www.emeraldcode.com/img/sold-out.png);
+    background-repeat:no-repeat;
+    background-position:center center;
+    z-index:5;
+}
+.detail .left .product-image img
+{
+    max-width:none;
+    max-height:none;
+}
+.detail .left .product-image img.main-img
+{
+    width:100%;
+    height:auto;
+    margin:0;
+    border:none;
+    padding:0;
+    text-decoration:none;
+    font-size:0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.detail .right .cart-buttons
+{
+    float:right;
+}
+.detail .right .cart-buttons .quantity-box
+{
+    margin-bottom:5px;
+}
+.detail .right .cart-buttons .quantity-box .label
+{
+    width:auto;
+}
+.detail .right .cart-buttons .add-to-cart
+{
+
+}
+.detail .center .product-name
+{
+    text-align:left;
+    display:block;
+    margin-bottom:5px;
+    font-size:1.5em;
+}
+.detail .center .product-price 
+{
+}
+.detail .center .product-price .value
+{
+    color:#000;
+    font-size:1.5em;
+}
+.detail .center .product-price .value.discount
+{
+    text-decoration:line-through;
+}
+.detail .product-size 
+{
+    margin-top:5px;
+    display:block;
+}
+.detail .colors
+{
+    margin-top:5px;
+    display:inline-block;
+}
+.detail .colors .color-group
+{
+    display:inline-block;
+    margin-left: 10px;
+}
+.detail .colors .color
+{
+    margin-top:3px;
+    cursor:pointer;
+    white-space:nowrap;
+}
+.detail .colors .label
+{
+    vertical-align:top;
+}
+.detail .colors .color .value
+{
+    width:20px;
+    height:20px;
+    display:inline-block;
+    border:1px solid #fff;
+    vertical-align:middle;
+    margin-right:3px;
+}
+.detail .colors .color .value.selected
+{
+    border:1px solid #000;
+}
+.detail .colors .color .value span
+{
+    width:18px;
+    height:18px;
+    border:1px solid #ccc;
+    display:block;
+}
+.detail .colors .color .label
+{
+    vertical-align:middle;
+    color:#000;
+    text-align:left;
+    margin-left:0;
+}
+.detail .colors .color:hover .label
+{
+    text-decoration:underline;
+}
+.detail .product-description
+{
+    padding:0 20px;
+}
+.detail .product-description .label
+{
+    font-size:1.5em;
+    width:100%;
+    text-align:left;
+    color:#000;
+}
+.detail .product-description .value
+{
+    font-size:1.2em;
+}
+.clear
+{
+    clear:both;
+}

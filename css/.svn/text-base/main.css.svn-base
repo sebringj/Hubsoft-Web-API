@@ -1,0 +1,13 @@
+﻿body 
+{
+      
+}
+.navbar ul.pullright.nav.right-nav
+{
+    float:right;
+}
+#cartStatusLi 
+{
+    display:none;
+}
+.navbar .nav li.loggedin, .navbar .nav li.loggedout { display:none; }
