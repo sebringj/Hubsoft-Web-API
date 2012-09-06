@@ -20,9 +20,9 @@ The actual Hubsoft Web API is privately owned by Emerald Code Inc.
 
 See [Pricing Details](http://www.emeraldcode.com/hubsoft-web-api)
 
-## Thanks to…
+## Thanks toï¿½
 
-* [Lee Decker of Hubsoft](http://www.hubsoft.com.com/)
+* [Lee Decker of Hubsoft](http://www.hubsoft.com/)
 * [Neal McKinney](mailto:neal_mckinney@yahoo.com) for Beta testing and being the first web developer to use it
 
-_– [Emerald Code](http://www.emeraldcode.com/)_
+_ï¿½ [Emerald Code](http://www.emeraldcode.com/)_
