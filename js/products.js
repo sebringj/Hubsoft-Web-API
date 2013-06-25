@@ -1,5 +1,5 @@
 ﻿(function () {
-    var defaultTags = 'helmet,jackets,pants';
+    var defaultTags = 'helmet';
 
     function renderProducts(data) {
         var html, colorsHash = {}, colors = [], i = 0, len = data.products.length;
