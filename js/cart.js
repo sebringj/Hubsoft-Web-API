@@ -1,6 +1,6 @@
 ﻿(function () {
     function updateCart() {
-        emeraldcode.getCartProducts(function (data) {
+        hubsoft.getCartProducts(function (data) {
             var i, len, html, item;
             data.subtotal = 0;
             if (data.items != null && data.items.length > 0) {
@@ -11,7 +11,7 @@
                 html = new EJS({ element: 'cartTemplate' }).render(data);
                 $('#cartList').html(html);
             }
-            if (!data.items || data.items == null || emeraldcode.cart.items.length === 0) {
+            if (!data.items || data.items == null || hubsoft.cart.items.length === 0) {
                 $('#cartList').html(new EJS({ element: 'cartTemplate' }).render({ subtotal: 0, items: [] }));
                 $('#cart').fadeOut('fast', function () {
                     $('#no-items').fadeIn('fast');
@@ -20,9 +20,9 @@
         });
     }
 
-    emeraldcode.ready(function () {
+    hubsoft.ready(function () {
         updateCart();
-        emeraldcode.validateCart(function (data) {
+        hubsoft.validateCart(function (data) {
             if (data.success) {
                 if (data.message) {
                     alert(data.message);
@@ -33,7 +33,7 @@
 
     $('body').on('click', '#cart button.btn-close', function (ev) {
         var $tr = $(this).closest('tr'), sku = $tr.data('sku');
-        emeraldcode.cart.remove(sku);
+        hubsoft.cart.remove(sku);
         $tr.fadeOut('fast', function () {
             $tr.remove();
             updateCart();
@@ -47,18 +47,18 @@
         if (ev.which >= 48 && ev.which <= 57) {
             val = parseInt($(this).val());
             if (val === 0) {
-                emeraldcode.cart.remove(sku);
+                hubsoft.cart.remove(sku);
             } else {
-                emeraldcode.cart.snapshot();
-                emeraldcode.cart.set(sku, val);
-                emeraldcode.validateCart(function (data) {
+                hubsoft.cart.snapshot();
+                hubsoft.cart.set(sku, val);
+                hubsoft.validateCart(function (data) {
                     if (data.success) {
                         if (data.message) {
                             alert(data.message);
                         }
                     } else {
                         if (data.errors) {
-                            emeraldcode.cart.undo();
+                            hubsoft.cart.undo();
                             updateCart();
                             alert(data.errors[0].message);
                         }

@@ -1,11 +1,11 @@
 ﻿// config
-emeraldcode.client = 'klim';
-emeraldcode.thumbNailImageIndex = 6;
-emeraldcode.detailImageIndex = 0;
-emeraldcode.global = { googleAnalytics : '' };
-emeraldcode.page = { messsages: {} };
+hubsoft.clientid = 'klim';
+hubsoft.thumbNailImageIndex = 6;
+hubsoft.detailImageIndex = 0;
+hubsoft.global = { googleAnalytics : '' };
+hubsoft.page = { messsages: {} };
 
-emeraldcode.cart.updateUI(function () {
+hubsoft.cart.updateUI(function () {
     var cartCount = emeraldcode.cart.itemCount();
     if (cartCount > 0) {
         $('#cartStatus').find('.count').text(cartCount);
@@ -14,11 +14,11 @@ emeraldcode.cart.updateUI(function () {
         $('#cartStatusLi').hide();
     }
 });
-emeraldcode.cart.triggerUpdateUI();
+hubsoft.cart.triggerUpdateUI();
 
-emeraldcode.handleLoginState = function () {
+hubsoft.handleLoginState = function () {
     $('.loggedin,.loggedout').hide();
-    if (emeraldcode.isLoggedIn()) {
+    if (hubsoft.isLoggedIn()) {
         if (sessionStorage['username']) {
             $('.loggedin').find('a .username').text(sessionStorage['username']).end().show();
         }
@@ -27,7 +27,7 @@ emeraldcode.handleLoginState = function () {
         $('.loggedout').show();
     }
 };
-emeraldcode.handleLoginState();
+hubsoft.handleLoginState();
 
 jQuery(function () {
     $('.signoutlink a').click(function (ev) {

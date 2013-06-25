@@ -1,4 +1,4 @@
-﻿(function (ec) { // closure allows "ec" shortcut for "emeraldcode"
+﻿(function () {
     var defaultTags = 'helmet,jackets,pants';
 
     function renderProducts(data) {
@@ -48,7 +48,7 @@
 
         // go to Emerald Code to get product results
         sessionStorage['products-breadcrumb'] = hash;
-        ec.getProducts({
+        hubsoft.getProducts({
             // offset : 2, // for paging
             cache: 5,
             limit: 100,
@@ -56,7 +56,7 @@
         }, renderProducts);
     }
 
-    ec.ready(function () {
+    hubsoft.ready(function () {
         handleHash();
     });
 
@@ -111,4 +111,4 @@
         $scroller.css({ left: scrollLeft }, 'fast');
     });
 
-})(emeraldcode);
+})();

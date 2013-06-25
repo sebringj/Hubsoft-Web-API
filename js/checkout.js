@@ -7,7 +7,7 @@ function initCart(data) {
     $shippingForm = $('#cart-page .shipping-step form'),
     $paymentForm = $('#cart-page .payment-step form'),
     $reviewForm = $('#cart-page .review-step form'),
-    cart = emeraldcode.cart,
+    cart = hubsoft.cart,
     handleInputError = function () {
         $(this).addClass('error');
     },
@@ -18,9 +18,9 @@ function initCart(data) {
         $(this).removeClass('error');
     },
     getSubTotal = function () {
-        var i = 0, len = emeraldcode.cartItems.length, total = 0;
+        var i = 0, len = hubsoft.cartItems.length, total = 0;
         for (; i < len; i++) {
-            total += (emeraldcode.cartItems[i].unitPrice * cart.getVal(emeraldcode.cartItems[i].sku));
+            total += (hubsoft.cartItems[i].unitPrice * cart.getVal(hubsoft.cartItems[i].sku));
         }
         console.log('getSubtotal() ' + total);
         return total;
@@ -49,13 +49,13 @@ function initCart(data) {
         $('#cart-page .left .review-text').hide();
     },
     drawCartContents = function () {
-        var i = 0, len = emeraldcode.cartItems.length, item, $tempDiv = $('<div />');
+        var i = 0, len = hubsoft.cartItems.length, item, $tempDiv = $('<div />');
         window._gaq = []; // (www) google analytics for shopping cart
         for (; i < len; i++) {
-            item = emeraldcode.cartItems[i];
+            item = hubsoft.cartItems[i];
             $tempDiv.append(
                 $('<div />').append(
-                    $('<img />').attr('src', item.images[emeraldcode.thumbNailImageIndex])
+                    $('<img />').attr('src', item.images[hubsoft.thumbNailImageIndex])
                 ).append(
                     $('<span />')
                         .append($('<span>').text(item.productName))
@@ -80,11 +80,11 @@ function initCart(data) {
         $('#cart-page .right .cart .cart-count').text(cart.itemCount());
     };
 
-    emeraldcode.subTotal = 0;
-    emeraldcode.cartItems = data.items;
-    emeraldcode.setReportMode = setReportMode;
-    emeraldcode.setCompactMode = setCompactMode;
-    emeraldcode.setFormEditMode = setFormEditMode;
+    hubsoft.subTotal = 0;
+    hubsoft.cartItems = data.items;
+    hubsoft.setReportMode = setReportMode;
+    hubsoft.setCompactMode = setCompactMode;
+    hubsoft.setFormEditMode = setFormEditMode;
 
     if (cart.items.length === 0) {
         $('#cart-page > div').hide();
@@ -92,10 +92,10 @@ function initCart(data) {
         window.location = './cart.htm';
         return;
     } else {
-        emeraldcode.subTotal = getSubTotal();
+        hubsoft.subTotal = getSubTotal();
     }
 
-    $('#cart-page .right .sub-total .value').text('$' + emeraldcode.subTotal.toFixed(2));
+    $('#cart-page .right .sub-total .value').text('$' + hubsoft.subTotal.toFixed(2));
     drawCartContents();
 
     if (arguments.length > 1) {
@@ -115,7 +115,7 @@ function initCart(data) {
             $shippingForm.find('.loading').stop(true, true).fadeIn('fast');
             $shippingForm.closest('.step').data('complete', true);
             $('.right .shipping, .right .tax, .right .total').hide();
-            emeraldcode.authShipping(emeraldcode.getFormJSON($('#cart-page .shipping-step form')), function (d) {
+            hubsoft.authShipping(hubsoft.getFormJSON($('#cart-page .shipping-step form')), function (d) {
                 var stateValue = '';
                 drawCartContents(d.orderNumber);
                 blockForm = false;
@@ -159,16 +159,16 @@ function initCart(data) {
                     $('.right .shipping .value').text('$' + d.shippingAmount.toFixed(2));
                     $('.right .tax .value').text('$' + d.taxAmount.toFixed(2));
                     $('.right .total .value span').text('$' + (
-                        emeraldcode.subTotal + d.shippingAmount + d.taxAmount
+                        hubsoft.subTotal + d.shippingAmount + d.taxAmount
                     ).toFixed(2));
                     $('.right .shipping, .right .tax, .right .total').show();
-                    _gaq.unshift(["_setAccount", emeraldcode.global.googleAnalytics]);
+                    _gaq.unshift(["_setAccount", hubsoft.global.googleAnalytics]);
                     _gaq.unshift(["_trackPageview"]);
                     _gaq.unshift([
                         "_addTrans",
                         d.orderNumber + '',
                         "Checkout",
-                        (emeraldcode.subTotal + d.shippingAmount + d.taxAmount).toFixed(2) + '',
+                        (hubsoft.subTotal + d.shippingAmount + d.taxAmount).toFixed(2) + '',
                         d.taxAmount.toFixed(2) + '',
                         d.shippingAmount.toFixed(2) + '',
                         d.shippingInfo.city,
@@ -249,7 +249,7 @@ function initCart(data) {
         blockForm = true;
         $('.review-step form').find('button').prop('disabled', true);
 
-        formJSON = emeraldcode.getFormJSON($paymentForm);
+        formJSON = hubsoft.getFormJSON($paymentForm);
         formJSON.shippingAddress = $shippingForm.find('input[name="address"]').val() + ' ' +
             $shippingForm.find('input[name="address2"]').val();
         formJSON.shippingCity = $shippingForm.find('input[name="city"]').val();
@@ -258,7 +258,7 @@ function initCart(data) {
         formJSON.shippingCountry = $shippingForm.find('select[name="country"]').val();
         formJSON.additionalInfo = $shippingForm.find('input[name="additionalInfo"]').val();
 
-        emeraldcode.transact(formJSON, function (d) {
+        hubsoft.transact(formJSON, function (d) {
             var dt = new Date(), dateTime = dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString(),
             itemTemplate = $('#cart-item-template').html(), $tempItem = null, i = 0, item = null,
             unitPrice = 0, total = 0, $tempItems = $('<div />'), friendlyMessage = '';
@@ -275,10 +275,10 @@ function initCart(data) {
                 );
                 // draw shopping cart contents
                 $('#cart-page .receipt .cart-count').text($('#cart-page .right .cart-count').text());
-                for (i = 0; i < emeraldcode.cartItems.length; i++) {
-                    item = emeraldcode.cartItems[i];
+                for (i = 0; i < hubsoft.cartItems.length; i++) {
+                    item = hubsoft.cartItems[i];
                     $tempItem = $('<div>').html(itemTemplate);
-                    $tempItem.find('.thumb').attr('src', item.images[emeraldcode.thumbNailImageIndex]);
+                    $tempItem.find('.thumb').attr('src', item.images[hubsoft.thumbNailImageIndex]);
                     $tempItem.find('.name').text(item.productName);
                     $tempItem.find('.size').text(item.sizeName);
                     $tempItem.find('.color').text(item.colorName);
@@ -318,8 +318,8 @@ function initCart(data) {
                     delete sessionStorage['shipping-state'];
                     delete sessionStorage['shipping-method'];
                 }
-                emeraldcode.cart.clearCookie();
-                emeraldcode.removeCoupon();
+                hubsoft.cart.clearCookie();
+                hubsoft.removeCoupon();
             } else {
                 $('.review-step .disclaimer').stop(true, true).slideUp('fast');
                 friendlyMessage = d.message;
@@ -501,8 +501,8 @@ function initCart(data) {
     });
 }
 
-emeraldcode.ready(function () {
-    emeraldcode.getShippingOptions(function (data) {
+hubsoft.ready(function () {
+    hubsoft.getShippingOptions(function (data) {
         var $select = $('<select>'), so = data.shippingOptions, i = 0, len = so.length;
         $select.append($('<option>').val('').text('SELECT'));
         for (; i < len; i++) {
@@ -534,7 +534,7 @@ emeraldcode.ready(function () {
             $('.shipping-step select[name=country]').trigger('change');
             $('.payment-step select[name=country]').trigger('change');
         });
-        emeraldcode.getCartProducts(initCart);
+        hubsoft.getCartProducts(initCart);
     });
 });
 
@@ -546,19 +546,19 @@ $(function () {
         if (val === '') {
             return;
         }
-        emeraldcode.ready(function () {
-            emeraldcode.setCoupon({ coupon: val }, function (data) {
+        hubsoft.ready(function () {
+            hubsoft.setCoupon({ coupon: val }, function (data) {
                 if (data.success) {
                     $('.coupon-form').hide();
                     $('.coupon.alert-success').text('Save ' + data.percentOff + '% off!').show();
-                    emeraldcode.getCartProducts(function (data) {
+                    hubsoft.getCartProducts(function (data) {
                         if ($('.payment-step').find('input[name="orderNumber"]').val()) {
-                            emeraldcode.setCompactMode($('.review-step'));
-                            emeraldcode.setCompactMode($('.payment-step'));
-                            emeraldcode.setFormEditMode($('.shipping-step'));
+                            hubsoft.setCompactMode($('.review-step'));
+                            hubsoft.setCompactMode($('.payment-step'));
+                            hubsoft.setFormEditMode($('.shipping-step'));
                             $('.shipping-step form').trigger('submit');
                         }
-                        emeraldcode.cartItems = data.items;
+                        hubsoft.cartItems = data.items;
                         initCart(data, true);
                     });
                 } else {

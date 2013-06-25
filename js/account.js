@@ -1,4 +1,4 @@
-﻿emeraldcode.trackingDisplay = function (shippingMethodCode, trackingNumber) {
+﻿hubsoft.trackingDisplay = function (shippingMethodCode, trackingNumber) {
     // use if fedex is your shipping method
     /*if (shippingMethodCode.toLowerCase().indexOf('usps') === -1) {
         return '<a target="_blank" href="http://www.fedex.com/Tracking?cntry_code=us&language=english&tracknumbers=' + trackingNumber + '&action=track">' + trackingNumber + '</a>'
@@ -13,15 +13,15 @@
         $('#signInForm').modal('hide');
         $('.password').val('');
 
-        emeraldcode.getUserInfo(function(data) {
+        hubsoft.getUserInfo(function(data) {
             if (!data.success) {
-                emeraldcode.logout(function(){
+                hubsoft.logout(function(){
                     handleLogout();
                 });
                 return;
             }
             sessionStorage['username'] = data.userInfo.firstName;
-            emeraldcode.handleLoginState();
+            hubsoft.handleLoginState();
             $('#accountContent').html((new EJS({ element: 'accountTemplate' }).render(data)));
 
         });
@@ -39,8 +39,8 @@
 
     $('#signInForm').modal().modal('hide');
 
-    emeraldcode.ready(function () {
-        if (emeraldcode.isLoggedIn()) {
+    hubsoft.ready(function () {
+        if (hubsoft.isLoggedIn()) {
             handleLogin();
         } else {
             handleLogout();
@@ -50,13 +50,13 @@
 
     $('#signInForm').submit(function(ev){
         ev.preventDefault();
-        emeraldcode.ready(function(){
-            emeraldcode.login({
+        hubsoft.ready(function(){
+            hubsoft.login({
                 email: $.trim($('.email').val()), 
                 password : $('.password').val()
             }, function(data) {
                 $('#signInForm').find('.alert').hide();
-                emeraldcode.handleLoginState();
+                hubsoft.handleLoginState();
                 if (data.success) {
                      handleLogin();
                 } else {
@@ -77,8 +77,8 @@
     // handle promotion click
     .on('click.ec', '#promotions a', function(ev){
         ev.preventDefault();
-        emeraldcode.cart.clearCookie();
-        emeraldcode.setPromotion({promotion: $(this).data('promotion')});
+        hubsoft.cart.clearCookie();
+        hubsoft.setPromotion({promotion: $(this).data('promotion')});
         window.location = './products.htm';
     })
     // handle toggle order detail
@@ -101,7 +101,7 @@
         var $form = $(this),
             email = $.trim($form.find('.email').val());
         ev.preventDefault();
-        emeraldcode.resetPassword({
+        hubsoft.resetPassword({
             email : email
         }, function(data) {
             $form.find('.alert').hide();
@@ -138,7 +138,7 @@
             return;
         }
 
-        emeraldcode.changePassword({
+        hubsoft.changePassword({
             oldPassword : oldPassword,
             newPassword : newPassword
         }, function(data) {

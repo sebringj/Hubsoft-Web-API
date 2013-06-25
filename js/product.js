@@ -1,8 +1,8 @@
-﻿(function (ec) { // "ec" shortcut for "emeraldcode"
+﻿(function () {
 
     function drawProduct() {
         var hash = window.location.hash.substr(1);
-        ec.getProduct({
+        hubsoft.getProduct({
             productURL: hash
         }, function (data) {
             document.title = data.product.productName;
@@ -21,8 +21,8 @@
         }
     }
 
-    ec.cart.triggerUpdateUI();
-    ec.ready(function () {
+    hubsoft.cart.triggerUpdateUI();
+    hubsoft.ready(function () {
         drawProduct();
     });
 
@@ -43,10 +43,10 @@
             alert('select a size');
             return;
         }
-        ec.cart.snapshot();
-        ec.cart.addQuantity(sku, parseInt(qty));
+        hubsoft.cart.snapshot();
+        hubsoft.cart.addQuantity(sku, parseInt(qty));
 
-        ec.validateCart(function (data) {
+        hubsoft.validateCart(function (data) {
             if (!data.success) {
                 ec.cart.undo();
                 drawProduct();
@@ -58,4 +58,4 @@
             window.location = './cart.htm';
         });
     });
-})(emeraldcode);
+})();
